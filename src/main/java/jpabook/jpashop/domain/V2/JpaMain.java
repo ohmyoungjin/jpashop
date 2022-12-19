@@ -1,11 +1,10 @@
 package jpabook.jpashop.domain.V2;
 
-import jpabook.jpashop.domain.V1.Order;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import java.time.LocalDateTime;
 
 public class JpaMain {
 
@@ -19,6 +18,35 @@ public class JpaMain {
         //트랜잭션 시작
         tx.begin();
         try {
+            //주문자
+            Member member = new Member();
+            member.setName("maeng2");
+            member.setCity("seoul");
+            member.setStreet("samil");
+            member.setZipcode("141-1");
+            em.persist(member);
+
+            //아이템
+            Item item = new Item();
+            item.setName("apple");
+            item.setPrice(1000);
+            item.setStockQuantity(500);
+            em.persist(item);
+
+            //주문서
+            Order order = new Order();
+            order.setMember(member);
+            order.setOrderDate(LocalDateTime.now());
+            order.setStatus(OrderStatus.ORDER);
+            em.persist(order);
+
+            OrderItem orderItem = new OrderItem();
+            orderItem.setOrder(order);
+            orderItem.setItem(item);
+            orderItem.setCount(2);
+            orderItem.setOrderPrice(5000);
+            em.persist(orderItem);
+
 
             tx.commit();
         } catch (Exception e) {
