@@ -1,9 +1,7 @@
 package jpabook.jpashop.domain.V2;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Item {
@@ -16,6 +14,8 @@ public class Item {
     private int price;
     private int stockQuantity;
 
+    @ManyToMany(mappedBy = "items")
+    private List<Category> category;
     public Long getId() {
         return id;
     }
