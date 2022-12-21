@@ -18,34 +18,13 @@ public class JpaMain {
         //트랜잭션 시작
         tx.begin();
         try {
-            //주문자
-            Member member = new Member();
-            member.setName("maeng2");
-            member.setCity("seoul");
-            member.setStreet("samil");
-            member.setZipcode("141-1");
-            em.persist(member);
-
-            //아이템
-            Item item = new Item();
-            item.setName("apple");
-            item.setPrice(1000);
-            item.setStockQuantity(500);
-            em.persist(item);
-
-            //주문서
-            Order order = new Order();
-            order.setMember(member);
-            order.setOrderDate(LocalDateTime.now());
-            order.setStatus(OrderStatus.ORDER);
-            em.persist(order);
-
-            OrderItem orderItem = new OrderItem();
-            orderItem.setOrder(order);
-            orderItem.setItem(item);
-            orderItem.setCount(2);
-            orderItem.setOrderPrice(5000);
-            em.persist(orderItem);
+            Book book = new Book();
+            book.setName("머큐리");
+            book.setPrice(12000);
+            book.setAuthor("몰루");
+            book.setCreatedTime(LocalDateTime.now());
+            book.setModifiedTime(LocalDateTime.now());
+            em.persist(book);
 
 
             tx.commit();
